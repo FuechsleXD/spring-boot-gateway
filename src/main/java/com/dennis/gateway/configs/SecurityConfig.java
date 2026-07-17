@@ -12,14 +12,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        // JWT-Prüfung passiert im AuthFilter; Spring Security hält hier nur die
+        // technischen Standardmechanismen aus.
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
                 .logout(ServerHttpSecurity.LogoutSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/**").permitAll()
-                        .anyExchange().authenticated())
+                        .anyExchange().permitAll())
                 .build();
     }
 }
