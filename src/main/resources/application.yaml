@@ -5,27 +5,6 @@ spring:
   application:
     name: gateway
 
-  cloud:
-    gateway:
-      globalcors:
-        corsConfigurations:
-          "[/**]":
-            allowedOrigins: "*"
-            allowedMethods: "*"
-            allowedHeaders: "*"
-            allowCredentials: true
-      default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
-      routes:
-        - id: career-service
-          uri: lb://career
-          predicates:
-            - Path=/career/**
-        - id: auth-service
-          uri: lb://auth
-          predicates:
-            - Path=/auth/**
-
 eureka:
   client:
     service-url:
